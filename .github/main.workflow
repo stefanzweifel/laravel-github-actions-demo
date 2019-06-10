@@ -1,8 +1,9 @@
-workflow "phpunit / phpinsights" {
+workflow "phpunit / phpinsights / php-cs-fixer" {
   on = "push"
   resolves = [
     "phpunit",
     "phpinsights"
+    "auto-commit-php-cs-fixer"
   ]
 }
 
@@ -24,4 +25,20 @@ action "phpinsights" {
   needs = ["composer install"]
   uses = "stefanzweifel/laravel-phpinsights-action@v1.0.0"
   args = "-v --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80"
+}
+
+# Run php-cs-fixer
+action "php-cs-fixer" {
+  uses = "docker://oskarstark/php-cs-fixer-ga"
+}
+
+action "auto-commit-php-cs-fixer" {
+  needs = ["php-cs-fixer"]
+  uses = "stefanzweifel/git-auto-commit-action@v1.0.0"
+  secrets = ["GITHUB_TOKEN"]
+  env = {
+    COMMIT_MESSAGE = "Apply php-cs-fixer changes"
+    COMMIT_AUTHOR_EMAIL  = "hello@stefanzweifel.io"
+    COMMIT_AUTHOR_NAME = "Stefan Zweifel"
+  }
 }
