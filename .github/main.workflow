@@ -1,7 +1,8 @@
-workflow "phpunit" {
+workflow "phpunit / phpinsights" {
   on = "push"
   resolves = [
     "phpunit",
+    "phpinsights"
   ]
 }
 
@@ -16,4 +17,11 @@ action "phpunit" {
   needs = ["composer install"]
   uses = "./actions/run-phpunit/"
   args = "tests/"
+}
+
+# Run phpinsights
+action "phpinsights" {
+  needs = ["composer install"]
+  uses = "stefanzweifel/laravel-phpinsights-action@v1.0.0"
+  args = "-v --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80"
 }
