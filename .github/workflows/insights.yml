@@ -1,9 +1,9 @@
-name: test
+name: insights
 
 on: push
 
 jobs:
-  phpunit:
+  phpinsights:
     runs-on: ubuntu-latest
 
     steps:
