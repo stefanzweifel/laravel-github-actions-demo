@@ -1,0 +1,23 @@
+name: format
+
+on: pull_request
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+
+    - name: Run php-cs-fixer
+      uses: docker://oskarstark/php-cs-fixer-ga
+
+    - name: Commit changed files
+      uses: stefanzweifel/git-auto-commit-action@v2.1.0
+      with:
+        commit_message: Apply php-cs-fixer changes
+        branch: ${{ github.head_ref }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
