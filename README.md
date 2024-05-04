@@ -1,6 +1,6 @@
 # Laravel GitHub Actions Demo
 
-A demo application to showcase useful GitHub Actions for PHP developers. This is a companion repository to [this blog post](https://stefanzweifel.io/posts/github-actions-for-php-developers/).
+A demo application to showcase useful GitHub Actions for PHP developers. This is a companion repository to [this blog post](https://stefanzweifel.dev/posts/2019/06/13/github-actions-for-php-developers-hcl).
 
 Update: This repository has been updated to work with the latest GitHub Actions version. Checkout [this Pull Request](https://github.com/stefanzweifel/laravel-github-actions-demo/pull/2) to learn, how I've migrated from the HCL syntax to the YAML syntax.
 
